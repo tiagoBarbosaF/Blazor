@@ -1,0 +1,10 @@
+@page "/catch-all/{*pageRoute}"
+
+<h1>CatchAll: @PageRoute</h1>
+
+@code {
+
+    [Parameter]
+    public string PageRoute { get; set; }
+
+}

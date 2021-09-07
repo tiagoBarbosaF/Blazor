@@ -1,0 +1,20 @@
+@page "/User/{Id:int}/{Option:bool?}"
+
+<h1>User Id: @Id</h1>
+<p class="alert-primary font-weight-bold">
+    This is a text page component Blazor where demonstrate routes on URL,
+    using Parameter for describe a User Id: @Id
+</p>
+<p class="font-weight-bold">
+    Option: @Option
+</p>
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Parameter]
+    public bool Option { get; set; }
+
+}

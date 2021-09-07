@@ -1,0 +1,36 @@
+@page "/Navigate"
+@using Microsoft.Extensions.Logging
+@implements IDisposable
+@inject ILogger<Navigate> _logger
+@inject NavigationManager _navigationManager
+
+<h1>Navigate in component code example</h1>
+
+<button class="btn btn-primary" @onclick="NavigateToCounterComponent">
+    Navigate to Counter Page
+</button>
+
+
+@code {
+
+    private void NavigateToCounterComponent()
+    {
+        _navigationManager.NavigateTo("counter");
+    }
+
+    protected override void OnInitialized()
+    {
+        _navigationManager.LocationChanged += HandleLocationChanged;
+    }
+
+    private void HandleLocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        _logger.LogInformation($"URL of new location: {e.Location}");
+    }
+
+    public void Dispose()
+    {
+        _navigationManager.LocationChanged -= HandleLocationChanged;
+    }
+
+}
