@@ -1,0 +1,45 @@
+﻿@page "/"
+@using System.Xml.XPath
+
+<h1>To Do List</h1>
+
+<h3>How many Todos? @todos.Count(todo => !todo.IsDone)</h3>
+
+<div class="uk-margin">
+    <div class="uk-inline uk-width-1-1">
+        <button class="uk-form-icon uk-form-icon-flip" uk-icon="icon: plus-circle" @onclick="AddNesTask"></button>
+        <input class="uk-input uk-form-large uk-width-1-1" placeholder="New Task" @bind="newToDo"/>
+    </div>
+</div>
+
+<ul class="uk-list uk-list-divider uk-list-large">
+    @foreach (var item in todos)
+    {
+        <li>
+            <label>
+                <input class="uk-checkbox" type="checkbox" @bind="item.IsDone"/> @item.Title
+            </label>
+        </li>
+    }
+</ul>
+
+@code
+{
+    public class TodoItem
+    {
+        public string Title { get; set; }
+        public bool IsDone { get; set; }
+    }
+
+    private string newToDo = "";
+    private List<TodoItem> todos = new List<TodoItem>();
+
+    void AddNesTask()
+    {
+        if (!string.IsNullOrWhiteSpace(newToDo))
+        {
+            todos.Add(new TodoItem {Title = newToDo});
+            newToDo = "";
+        }
+    }
+}
