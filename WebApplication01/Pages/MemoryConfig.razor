@@ -1,0 +1,30 @@
+@page "/MemoryConfig"
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration _configuration
+
+<h1>Memory Configuration example</h1>
+
+<h2>General specifications</h2>
+
+<ul>
+    <li>Color: @_configuration["color"]</li>
+    <li>Type: @_configuration["type"]</li>
+</ul>
+
+<h2>Wheels</h2>
+
+<ul>
+    <li>Count: @_configuration["wheels:count"]</li>
+    <li>Brand: @_configuration["wheels:brand"]</li>
+    <li>Type: @_configuration["wheels:brand:type"]</li>
+    <li>Year: @_configuration["wheels:year"]</li>
+</ul>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        var wheelsSection = _configuration.GetSection("wheels");
+    }
+
+}
